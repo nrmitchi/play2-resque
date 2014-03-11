@@ -13,7 +13,6 @@ libraryDependencies ++= {
   Seq(
     "play" %% "play" % playVersion,
     "play" %% "play-test" % playVersion % "test",
-    "net.debasishg" %% "redisclient" % "2.10",
     "net.greghaines" % "jesque" % "2.0.0"
   )
 }

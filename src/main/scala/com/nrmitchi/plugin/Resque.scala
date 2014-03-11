@@ -1,12 +1,9 @@
 package com.nrmitchi.plugin
 
-import com.redis._
 
 import net.greghaines.jesque._
 import net.greghaines.jesque.client.ClientImpl
-
 import play.Logger
-import redis.clients.jedis.Client
 
 object Resque {
   private var _host: String        = _
