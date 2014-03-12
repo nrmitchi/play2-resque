@@ -23,6 +23,8 @@ class Play2RedisSpec extends Specification {
           client.enqueue("hello", new Job("Worker", Array("params","moreparams", new Date())))
         }
 
+        Resque.push("hello","Worker", Array("params","moreparams", new Date()))
+
       }
     }
 
