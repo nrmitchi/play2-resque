@@ -1,6 +1,6 @@
 # play2-resque
 
-Thin resque client wrapper for play2.2 framework.
+Thin resque(jesque) client wrapper for play2.1+ framework.
 
 ## Install
 
@@ -19,7 +19,15 @@ val appDependencies = Seq(
   anorm
 )
 ```
-
+ With Play 2.2, exclude scala-stm
+```scala
+val appDependencies = Seq(
+  "com.nrmitchi.plugin" % "play2-resque" % "0.0.1"
+    exclude("org.scala-stm", "scala-stm_2.10.0"),
+  jdbc,
+  anorm
+)
+```
 ## Usage
 
 You can use like this.
