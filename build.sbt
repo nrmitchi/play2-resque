@@ -28,7 +28,7 @@ publishTo <<= version { (v: String) =>
     Some("releases"  at nexus + "service/local/staging/deploy/maven2")
 }
 
-credentials += Credentials(Path.userHome / ".sbt" / "sonatype.sbt")
+credentials += Credentials(Path.userHome / ".sbt" / "sonatype.creds")
 
 crossPaths := false
 

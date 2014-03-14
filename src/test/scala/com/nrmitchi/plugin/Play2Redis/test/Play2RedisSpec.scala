@@ -6,6 +6,8 @@ import play.api.test.Helpers._
 import com.nrmitchi.plugin.Resque
 import net.greghaines.jesque.Job
 import java.util.Date
+import play.api.libs.json.{JsObject, JsString, Json}
+import java.util
 
 class Play2RedisSpec extends Specification {
 
@@ -24,6 +26,8 @@ class Play2RedisSpec extends Specification {
         }
 
         Resque.push("hello","Worker", Array("params","moreparams", new Date()))
+
+        Resque.push("hello", "Worker", Array(12321312, Json.obj("test" -> "value" ).toString()))
 
       }
     }

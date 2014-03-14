@@ -19,11 +19,12 @@ val appDependencies = Seq(
   anorm
 )
 ```
- With Play 2.2, exclude scala-stm
+ With Play 2.2, exclude scala-stm and play
 ```scala
 val appDependencies = Seq(
   "com.nrmitchi.plugin" % "play2-resque" % "0.0.1"
-    exclude("org.scala-stm", "scala-stm_2.10.0"),
+    exclude("org.scala-stm", "scala-stm_2.10.0")
+    exclude("play", "*"),
   jdbc,
   anorm
 )
