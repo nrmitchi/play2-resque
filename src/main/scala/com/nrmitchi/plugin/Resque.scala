@@ -9,31 +9,25 @@ object Resque {
   private var _host: String        = _
   private var _port: Int           = _
   private var _database: Int       = _
-  private var _namespace: Option[String]   = _
+  private var _namespace: String   = _
   private var _password: Option[String]    = _
   private var _debug: Boolean      = _
 
-  lazy val config = {
-    val conf = (new ConfigBuilder())
-      .withHost(_host)
-      .withPort(_port)
-      .withDatabase(_database)
-
-    _namespace match {
-      case Some(x) => conf.withNamespace(x)
-      case None => conf
-    }
-    _password match {
-      case Some(x) => conf.withPassword(x)
-      case None => conf
-    }
-  }
+  private lazy val config = new ConfigBuilder()
+                                  .withHost(_host)
+                                  .withPort(_port)
+                                  .withDatabase(_database)
+                                  .withPassword(_password match {
+                                    case Some(x) => if (x.length <= 0) null else x
+                                    case None => null
+                                  })
+                                  .withNamespace( if (_namespace.length <= 0) "play2resque" else _namespace )
 
 //  val config = new ConfigBuilder().build()
 
   private lazy val jesque = new ClientImpl(config.build())
 
-  def apply(host: String, port: Int, database: Int, namespace: Option[String], password: Option[String], debug: Boolean) = {
+  def apply(host: String, port: Int, database: Int, namespace: String, password: Option[String], debug: Boolean) = {
     _host = host
     _port = port
     _namespace = namespace
