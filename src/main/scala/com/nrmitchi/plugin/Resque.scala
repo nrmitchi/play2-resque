@@ -61,7 +61,7 @@ object Resque {
   }
 
   // Shortcut for publishing an event
-  def push(queue: String, className: String, payload: java.lang.Object) = {
-    jesque.enqueue(queue, new Job(className, payload))
+  def push(queue: String, className: String, payload: java.lang.Object*) = {
+    jesque.enqueue(queue, new Job(className, payload.toSeq:_*))
   }
 }

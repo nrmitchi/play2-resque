@@ -13,7 +13,7 @@ class Play2Resque(app: Application) extends Plugin {
   } catch {
     case (e) => 0
   }
-  private lazy val namespace = app.configuration.getString("resque.namespace").getOrElse("play2resque")
+  private lazy val namespace = app.configuration.getString("resque.namespace").getOrElse("resque")
   private lazy val password  = app.configuration.getString("resque.password")
 
   // Whether or not to print debug log statements

@@ -7,7 +7,7 @@ import com.nrmitchi.plugin.Resque
 import net.greghaines.jesque.Job
 import java.util.Date
 import play.api.libs.json.{JsObject, JsString, Json}
-import java.util
+import collection.JavaConverters._
 
 class Play2RedisSpec extends Specification {
 
@@ -22,12 +22,14 @@ class Play2RedisSpec extends Specification {
       running(FakeApplication(additionalConfiguration = testConfiguration)) {
 
         Resque.withClient { client =>
-          client.enqueue("hello", new Job("Worker", Array("params","moreparams", new Date())))
+          client.enqueue("hello", new Job("Worker", "params","moreparams", new Date()))
         }
 
-        Resque.push("hello","Worker", Array("params","moreparams", new Date()))
+        Resque.push("hello","Worker", Array("params","moreparams", new Date().toString))
 
-        Resque.push("hello", "Worker", Array(12321312, Json.obj("test" -> "value" ).toString()))
+        Resque.push("hello","Worker", "params","moreparams", new Date().toString)
+
+        Resque.push("hello", "Worker", 12321312.toString, Map("test" -> "value" ).asJava)
 
       }
     }
