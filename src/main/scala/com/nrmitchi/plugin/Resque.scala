@@ -42,7 +42,11 @@ object Resque {
   }
   def close() {
     log("Closing Resque connections...")
-    jesque.end
+    try {
+      jesque.end
+    } catch {
+      case e: Exception => log("Exception closing Jesque: "+e.getMessage)
+    }
     log("Resque connections closed...")
   }
 
